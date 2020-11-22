@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '//src//**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "push": "npm run build && scp -rp ./dist/* ubuntu@de.pano.today:~/pano/react",
+    "lint": "eslint src/. test/. --config .eslintrc.json --fix"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^5.0.12",
+    "@fullpage/react-fullpage": "^0.1.18",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.2.27",
+    "axios": "^0.21.0",
+    "lint-staged": "^10.0.7",
+    "moment-timezone": "^0.5.31",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-image-lightbox": "^5.1.1",
+    "react-live-clock": "^5.0.11",
+    "react-moment": "^1.0.0",
+    "react-wordcloud": "^1.2.7",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.1",
+    "umi": "^3.2.27",
+    "yorkie": "^2.0.0"
+  }
+}

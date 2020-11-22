@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Header } from 'semantic-ui-react';
+import { Button, Header, Icon } from 'semantic-ui-react';
 import Quote from '../Quote';
 import './QuotePage.css';
 

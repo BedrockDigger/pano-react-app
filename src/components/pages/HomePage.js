@@ -109,7 +109,8 @@ class HomePage extends PureComponent {
   }
 
   handleColorShuffle = () => {
-    localStorage['colorOffset'] = localStorage['colorOffset'] + 1;
+    let offset = localStorage['colorOffset']
+    localStorage.setItem('colorOffset', offset + 1)
   };
 
   handleFormSubmit(e) {
@@ -241,8 +242,10 @@ function Footer(props) {
       <Popup
         className="footer-icon"
         trigger={<Button circular color="twitter" icon="twitter" />}
+        hoverable
+        flowing
       >
-        <Header>Pending.</Header>
+        <Header as='a' color='blue' href='https://twitter.com/pano_today' target='_blank _noreferrer'>@pano_today</Header>
       </Popup>
       <span className="custom-divider">|</span>
       <Popup
@@ -252,7 +255,7 @@ function Footer(props) {
         hoverable
       >
         <Menu vertical secondary compact>
-          <Menu.Item header content="Preferred search engine" />
+          <Menu.Item header content="Search settings" />
           <Menu.Item
             content="Google"
             onClick={p.menuItemClick}
@@ -273,7 +276,6 @@ function Footer(props) {
             onClick={p.menuItemClick}
             active={p.engine == 'baidu'}
           />
-          <Divider />
           <Menu.Item fitted>
             <Radio
               label="Search in new tab"
@@ -282,8 +284,13 @@ function Footer(props) {
               onClick={p.radioClick}
             />
           </Menu.Item>
+          <Divider />
+          <Menu.Item header content="Site settings" />
           <Menu.Item fitted>
-            <Button label="shuffle accent color" onClick={p.shuffleColor} />
+            <Button icon size='small' labelPosition='left' onClick={p.shuffleColor} >
+              <Icon name='shuffle' />
+              Shuffle accent color
+            </Button>
           </Menu.Item>
         </Menu>
       </Popup>

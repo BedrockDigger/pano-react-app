@@ -1,16 +1,6 @@
-import React, { Component } from 'react';
-import {
-  Segment,
-  Card,
-  Progress,
-  Header,
-  Grid,
-  Image,
-  Button,
-  Popup,
-  Container,
-} from 'semantic-ui-react';
+import React from 'react';
 import Clock from 'react-live-clock';
+import { Header, Popup, Segment } from 'semantic-ui-react';
 import WikiNews from '../components/WikiNews';
 
 export default function TextClock() {
@@ -18,23 +8,19 @@ export default function TextClock() {
 
   const timezone = getTimezone();
   return (
-    <Grid centered fluid>
-      <Grid.Column width={2} floated="right">
-        <Popup
-          flowing
-          hoverable
-          position="bottom right"
-          trigger={
-            <Segment textAlign="center">
-              <Header>
-                <Clock format="MMM D, YYYY" timezone={timezone} />
-              </Header>
-            </Segment>
-          }
-        >
-          <WikiNews />
-        </Popup>
-      </Grid.Column>
-    </Grid>
+    <Popup
+      flowing
+      hoverable
+      position="bottom right"
+      trigger={
+        <Segment textAlign="center" floated='right' style={{ width: 200, marginTop: 20, marginRight: 50 }}>
+          <Header>
+            <Clock format="MMM D, YYYY" timezone={timezone} />
+          </Header>
+        </Segment>
+      }
+    >
+      <WikiNews />
+    </Popup>
   );
 }

@@ -1,14 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Icon,
-  Form,
-  Grid,
-  Input,
-  Image,
-  Dropdown,
-  Transition,
-  Popup,
-} from 'semantic-ui-react';
+import React from 'react';
+import { Form, Grid, Icon, Image, Input, Transition } from 'semantic-ui-react';
 
 export default function Search(props) {
   const p = props;

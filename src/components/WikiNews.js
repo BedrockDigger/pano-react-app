@@ -74,4 +74,4 @@ class WikiNews extends Component {
   }
 }
 
-export default Wikinews;
+export default WikiNews;

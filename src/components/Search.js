@@ -1,9 +1,18 @@
-import React, { Component } from 'react'
-import { Icon, Form, Grid, Input, Image, Dropdown, Transition, Popup } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import {
+  Icon,
+  Form,
+  Grid,
+  Input,
+  Image,
+  Dropdown,
+  Transition,
+  Popup,
+} from 'semantic-ui-react';
 
 export default function Search(props) {
-  const p = props
-  const s = p.hpState
+  const p = props;
+  const s = p.hpState;
   return (
     <Grid centered fluid>
       <Grid.Row>
@@ -13,11 +22,9 @@ export default function Search(props) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column width={8}>
-          <Form
-            onSubmit={p.formSubmit}
-          >
+          <Form onSubmit={p.formSubmit}>
             <Input
-              placeholder='All engines, one Pano.'
+              placeholder="All engines, one Pano."
               type="input"
               action="Search"
               fluid
@@ -28,16 +35,16 @@ export default function Search(props) {
         </Grid.Column>
       </Grid.Row>
     </Grid>
-  )
+  );
 }
 
 function LogoIcon(props) {
-  const p = props
+  const p = props;
   return (
     <Transition visible={p.vis} duration={200} animation="pulse">
       <Image>
         <Icon name={p.name} size="massive" color="blue" />
       </Image>
     </Transition>
-  )
+  );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 import ReactFullpage from '@fullpage/react-fullpage';
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
@@ -5,28 +6,25 @@ import ArtPage from '../components/pages/ArtPage';
 import HomePage from '../components/pages/HomePage';
 import QuotePage from '../components/pages/QuotePage';
 import TopHeader from '../components/TopHeader';
+import Welcome from '../components/WelcomeModal';
 import './index.less';
-import Welcome from '../components/WelcomeModal'
-
 
 class App extends Component {
-
   constructor(props) {
-    super()
+    super();
   }
 
   componentWillMount() {
-    let visited = localStorage['alreadyVisited']
+    let visited = localStorage['alreadyVisited'];
     if (visited) {
-      this.setState({ newUser: false })
-    }
-    else {
-      localStorage['alreadyVisited'] = true
-      this.setState({ newUser: true })
+      this.setState({ newUser: false });
+    } else {
+      localStorage['alreadyVisited'] = true;
+      this.setState({ newUser: true });
     }
   }
   render() {
-    const s = this.state
+    const s = this.state;
     return (
       <>
         {s.newUser && <Welcome />}
@@ -34,10 +32,10 @@ class App extends Component {
           easing="easeOutExpo"
           scrollingSpeed={500}
           scrollBar={true}
-          render={(fpSettings) => {
+          render={fpSettings => {
             return (
               <ReactFullpage.Wrapper>
-                <HomePage fpMoveTo={(n) => fpSettings.fullpageApi.moveTo(n)} />
+                <HomePage fpMoveTo={n => fpSettings.fullpageApi.moveTo(n)} />
                 <ArtPage />
                 <QuotePage />
               </ReactFullpage.Wrapper>
@@ -46,7 +44,7 @@ class App extends Component {
         />
         <TopHeader />
       </>
-    )
+    );
   }
 }
 

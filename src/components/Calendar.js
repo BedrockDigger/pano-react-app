@@ -13,7 +13,11 @@ export default function TextClock() {
       hoverable
       position="bottom right"
       trigger={
-        <Segment textAlign="center" floated='right' style={{ width: 200, marginTop: 20, marginRight: 50 }}>
+        <Segment
+          textAlign="center"
+          floated="right"
+          style={{ width: 200, marginTop: 20, marginRight: 50 }}
+        >
           <Header>
             <Clock format="MMM D, YYYY" timezone={timezone} />
           </Header>

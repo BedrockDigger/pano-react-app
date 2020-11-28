@@ -109,8 +109,8 @@ class HomePage extends PureComponent {
   }
 
   handleColorShuffle = () => {
-    let offset = localStorage['colorOffset']
-    localStorage.setItem('colorOffset', offset + 1)
+    let offset = localStorage['colorOffset'];
+    localStorage.setItem('colorOffset', offset + 1);
   };
 
   handleFormSubmit(e) {
@@ -245,7 +245,14 @@ function Footer(props) {
         hoverable
         flowing
       >
-        <Header as='a' color='blue' href='https://twitter.com/pano_today' target='_blank _noreferrer'>@pano_today</Header>
+        <Header
+          as="a"
+          color="blue"
+          href="https://twitter.com/pano_today"
+          target="_blank _noreferrer"
+        >
+          @pano_today
+        </Header>
       </Popup>
       <span className="custom-divider">|</span>
       <Popup
@@ -287,8 +294,13 @@ function Footer(props) {
           <Divider />
           <Menu.Item header content="Site settings" />
           <Menu.Item fitted>
-            <Button icon size='small' labelPosition='left' onClick={p.shuffleColor} >
-              <Icon name='shuffle' />
+            <Button
+              icon
+              size="small"
+              labelPosition="left"
+              onClick={p.shuffleColor}
+            >
+              <Icon name="shuffle" />
               Shuffle accent color
             </Button>
           </Menu.Item>

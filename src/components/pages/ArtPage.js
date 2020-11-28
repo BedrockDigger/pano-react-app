@@ -70,7 +70,7 @@ class Art extends Component {
                 <div>
                   <Image
                     src={imageHref}
-                    size="large"
+                    size="medium"
                     onClick={() => this.setState({ lightboxIsOpen: true })}
                     floated="right"
                     style={{ marginRight: '7vw' }}

@@ -5,8 +5,8 @@ import { Grid, Header, Icon } from 'semantic-ui-react';
 import genColor from '../utils/genColor';
 import './Quote.css';
 
-@connect(({ artwork }) => ({
-  artwork,
+@connect(({ pano }) => ({
+  quote: pano.quote,
 }))
 class Quote extends Component {
   render() {
@@ -14,14 +14,14 @@ class Quote extends Component {
     return (
       <Grid container textAlign="justified" columns={2}>
         <Grid.Row textAlign="center">
-          <Grid.Column width={3} textAlign="right">
+          <Grid.Column width={2} textAlign="right">
             <Icon name="quote left" size="massive" />
           </Grid.Column>
-          <Grid.Column width={13} textAlign="left">
-            <Header size="huge">
+          <Grid.Column width={14} textAlign="left">
+            <Header size="huge" textAlign="justified">
               <Header.Content>
                 <p className="quote-content">
-                  {this.props.artwork.quoteContent}
+                  {this.props.quote ? this.props.quote.content : ''}
                   <Icon
                     className="back-quotation-mark-fix"
                     name="quote right"
@@ -30,7 +30,7 @@ class Quote extends Component {
                 </p>
                 <Header color={genColor()} size="small" textAlign="right">
                   -&nbsp;
-                  {this.props.artwork.quoteSpeaker}
+                  {this.props.quote ? this.props.quote.speaker : ''}
                 </Header>
               </Header.Content>
             </Header>

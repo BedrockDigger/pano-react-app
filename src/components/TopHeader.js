@@ -11,17 +11,14 @@ import {
 } from 'semantic-ui-react';
 import genColor from '../utils/genColor';
 import './TopHeader.css';
+import Calendar from './Calendar';
 
-//question: how to use Sticky with fullpage
 export default function TopHeader() {
-  // var contextRef = createRef()
   return (
-    // <Ref innerRef={contextRef}>
-    //   <Sticky context={contextRef} pushing>
     <div className="top-header">
       <Segment>
-        <Grid verticalAlign="middle">
-          <Grid.Column floated="left" width={4} textAlign="left">
+        <Grid verticalAlign="middle" columns="equal">
+          <Grid.Column textAlign="left">
             <Button.Group>
               <Button
                 labelPosition="left"
@@ -34,14 +31,15 @@ export default function TopHeader() {
               <ReuseWelcome />
             </Button.Group>
           </Grid.Column>
-          <Grid.Column floated="right" width={12} textAlign="right">
-            <Label content="ver." detail="1.0.0_alpha" size="large" />
+          <Grid.Column textAlign="center">
+            <Calendar />
+          </Grid.Column>
+          <Grid.Column textAlign="right">
+            <Label content="ver" detail="1.1.0" size="large" />
           </Grid.Column>
         </Grid>
       </Segment>
     </div>
-    //   </Sticky>
-    // </Ref>
   );
 }
 
@@ -66,8 +64,8 @@ function ReuseWelcome() {
             A start panel for web browsing, a panorama of inspiration.
           </Header>
           <p>
-            Pano is a personal project by BedrockDigger, aka Estel, aimed at a
-            better start-off for daily browsing.
+            Pano is a personal project by Zhang Shuhao, aimed at a better
+            start-off for daily browsing.
           </p>
           <p>
             Functionalities here are limited but carefully cherry-picked, as to

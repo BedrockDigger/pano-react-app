@@ -37,8 +37,9 @@ function Footer(props) {
         color="grey"
         style={{ verticalAlign: 'middle', marginRight: 10 }}
       >
-        Pano is an open-source startpage by BedrockDigger. A start panel for web
-        browsing, a panorama of inspiration. Powered by React × Feathers.
+        Pano is an open-source search engine with daily inspiration by Zhang
+        Shuhao. A start panel for web browsing, a panorama of inspiration.
+        Powered by React × Feathers.
       </Header>
       <Button
         as="a"

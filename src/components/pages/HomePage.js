@@ -16,18 +16,19 @@ import {
   Radio,
   Transition,
 } from 'semantic-ui-react';
-import genColor from '../../utils/genColor';
 import Calendar from '../Calendar';
 import './HomePage.css';
 
-@connect(({ artwork }) => ({
-  artwork,
+@connect(({ pano }) => ({
+  wordCloud: pano.wordCloud.data,
+  color: pano.color,
 }))
 class HomePage extends PureComponent {
   domRef;
   constructor(props) {
     super(props);
     this.fpMoveTo = props.fpMoveTo;
+    this.frCb = props.frCb;
     this.domRef = React.createRef();
     this.engineCollection = [
       {
@@ -70,11 +71,10 @@ class HomePage extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'artwork/getData' });
+    this.props.dispatch({ type: 'pano/getData' });
   }
 
   move = () => {
-    // console.log("123")
     if (!this.state.isArrowVisible) {
       this.setState({ isArrowVisible: true }, this.arrowDisappear);
     }
@@ -111,6 +111,7 @@ class HomePage extends PureComponent {
   handleColorShuffle = () => {
     let offset = localStorage['colorOffset'];
     localStorage.setItem('colorOffset', offset + 1);
+    this.frCb();
   };
 
   handleFormSubmit(e) {
@@ -145,15 +146,11 @@ class HomePage extends PureComponent {
 
   render() {
     const s = this.state;
-    console.log(this.props.artwork);
-    console.log(s.engine.key);
     return (
       <div onMouseMove={this.move} className="section">
         <div className="home page wrapper">
           <div className="content wrapper">
-            <div className="cal wrapper">
-              <Calendar />
-            </div>
+            <div className="cal wrapper"></div>
             <div className="search wrapper">
               <Grid centered fluid>
                 <Grid.Row>
@@ -167,7 +164,7 @@ class HomePage extends PureComponent {
                         <Icon
                           name={s.engine.iconName}
                           size="massive"
-                          color={genColor()}
+                          color={this.props.color}
                         />
                       </Image>
                     </Transition>
@@ -190,7 +187,7 @@ class HomePage extends PureComponent {
               </Grid>
             </div>
             <div className="wordcloud">
-              <Wordcloud data={this.props.artwork.wordcloud} />
+              <Wordcloud data={this.props.wordCloud} />
             </div>
           </div>
           <div className="footer">
@@ -199,7 +196,7 @@ class HomePage extends PureComponent {
               radioClick={this.handleRadioClick}
               engine={s.engine.key}
               newWindow={s.searchInNewWindow}
-              shuffleColor={this.handleColorshuffle}
+              shuffleColor={this.props.dispatch({ type: 'pano/shuffleColor' })}
             />
           </div>
         </div>
@@ -237,7 +234,7 @@ function Footer(props) {
         className="footer-icon"
         trigger={<Button circular color="green" icon="wechat" />}
       >
-        <Image src="https://s3.ax1x.com/2020/11/22/D3WBZQ.jpg" />
+        <Image src="/wechat.png" />
       </Popup>
       <Popup
         className="footer-icon"
@@ -262,7 +259,7 @@ function Footer(props) {
         hoverable
       >
         <Menu vertical secondary compact>
-          <Menu.Item header content="Search settings" />
+          <Menu.Item header content="Search engine" />
           <Menu.Item
             content="Google"
             onClick={p.menuItemClick}
@@ -283,6 +280,7 @@ function Footer(props) {
             onClick={p.menuItemClick}
             active={p.engine == 'baidu'}
           />
+          <Divider />
           <Menu.Item fitted>
             <Radio
               label="Search in new tab"
@@ -290,19 +288,6 @@ function Footer(props) {
               checked={p.newWindow}
               onClick={p.radioClick}
             />
-          </Menu.Item>
-          <Divider />
-          <Menu.Item header content="Site settings" />
-          <Menu.Item fitted>
-            <Button
-              icon
-              size="small"
-              labelPosition="left"
-              onClick={p.shuffleColor}
-            >
-              <Icon name="shuffle" />
-              Shuffle accent color
-            </Button>
           </Menu.Item>
         </Menu>
       </Popup>
@@ -323,8 +308,8 @@ class Wordcloud extends PureComponent {
         }}
         callbacks={{
           onWordMouseOver: null,
-          getWordTooltip: word => '',
-          getWordColor: word => '#999',
+          getWordTooltip: () => '',
+          getWordColor: () => '#999',
         }}
       />
     );

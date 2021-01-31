@@ -10,8 +10,11 @@ import Welcome from '../components/WelcomeModal';
 import './index.less';
 
 class App extends Component {
-  constructor(props) {
+  constructor() {
     super();
+    // things to init:
+    // 1 isNewUser
+    // 2 colorOffset
   }
 
   componentWillMount() {
@@ -23,6 +26,9 @@ class App extends Component {
       this.setState({ newUser: true });
     }
   }
+
+  handleColorShuffle = () => {};
+
   render() {
     const s = this.state;
     return (
@@ -35,7 +41,10 @@ class App extends Component {
           render={fpSettings => {
             return (
               <ReactFullpage.Wrapper>
-                <HomePage fpMoveTo={n => fpSettings.fullpageApi.moveTo(n)} />
+                <HomePage
+                  fpMoveTo={n => fpSettings.fullpageApi.moveTo(n)}
+                  frCb={this.forceUpdate}
+                />
                 <ArtPage />
                 <QuotePage />
               </ReactFullpage.Wrapper>

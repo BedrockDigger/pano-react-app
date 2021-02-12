@@ -1,60 +1,64 @@
 /* eslint-disable react/no-deprecated */
-import ReactFullpage from '@fullpage/react-fullpage';
 import React, { Component } from 'react';
+import ReactFullpage from '@fullpage/react-fullpage';
+import Home from './Home';
+import Art from './Art';
+import Quote from './Quote';
+import fetchData from '../utils/fetchData'
+import calcColor from '../utils/calcColor'
 import 'semantic-ui-css/semantic.min.css';
-import ArtPage from '../components/pages/ArtPage';
-import HomePage from '../components/pages/HomePage';
-import QuotePage from '../components/pages/QuotePage';
-import TopHeader from '../components/TopHeader';
-import Welcome from '../components/WelcomeModal';
-import './index.less';
 
-class App extends Component {
+//TODO set standards for:
+//1.states
+//2.localStorage
+export default class App extends Component {
   constructor() {
     super();
-    // things to init:
-    // 1 isNewUser
-    // 2 colorOffset
-  }
-
-  componentWillMount() {
-    let visited = localStorage['alreadyVisited'];
-    if (visited) {
-      this.setState({ newUser: false });
-    } else {
-      localStorage['alreadyVisited'] = true;
-      this.setState({ newUser: true });
+    this.state = {
+      artwork: {},
+      quote: {},
+      todayInHistory: {},
+      wordCloud: {},
+      color: 'grey'
     }
   }
 
-  handleColorShuffle = () => {};
+  async componentDidMount() {
+    const data = await fetchData('receptionist')
+    const imageUrl = data.artwork.data.imageSrc;
+    const accentColor = calcColor(imageUrl);
+    this.setState((prevState) => ({ ...prevState, ...data }));
+    this.setState({ color: accentColor });
+  }
 
   render() {
     const s = this.state;
+    console.log(this.state)
     return (
-      <>
-        {s.newUser && <Welcome />}
-        <ReactFullpage
-          easing="easeOutExpo"
-          scrollingSpeed={500}
-          scrollBar={true}
-          render={fpSettings => {
-            return (
-              <ReactFullpage.Wrapper>
-                <HomePage
-                  fpMoveTo={n => fpSettings.fullpageApi.moveTo(n)}
-                  frCb={this.forceUpdate}
-                />
-                <ArtPage />
-                <QuotePage />
-              </ReactFullpage.Wrapper>
-            );
-          }}
-        />
-        <TopHeader />
-      </>
+      <ReactFullpage
+        easing="easeOutExpo"
+        scrollingSpeed={500}
+        scrollBar={true}
+        render={fpSettings => {
+          return (
+            <ReactFullpage.Wrapper>
+              <Home
+                todayInHistoryObject={s.todayInHistory.data}
+                wordCloudObject={s.wordCloud.data}
+                color={s.color}
+              />
+              <Art
+                artworkObject={s.artwork.data}
+                color={s.color}
+              />
+              <Quote
+                quoteObject={s.quote}
+                color={s.color}
+              />
+            </ReactFullpage.Wrapper>
+          );
+        }}
+      />
     );
   }
 }
-
-export default App;

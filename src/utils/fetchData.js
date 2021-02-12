@@ -1,12 +1,7 @@
-// import axios from 'axios'
-import { fetch } from 'dva';
+import axios from 'axios'
 
-export default async () => {
-  return new Promise(resolve => {
-    fetch('/receptionist', { method: 'GET' }).then(res => {
-      res.json().then(ret => {
-        resolve([ret]);
-      });
-    });
-  });
-};
+export default async function fetchData(target) {
+  const data = (await axios.get(target)).data;
+  console.log(data);
+  return data;
+}

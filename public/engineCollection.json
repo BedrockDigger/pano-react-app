@@ -1,0 +1,37 @@
+[
+  {
+    "value": "google",
+    "text": "Google",
+    "baseString": "https://www.google.com/search?q=",
+    "logoImage": "/google_logo.png",
+    "intro": "The most used search engine on the World Wide Web."
+  },
+  {
+    "value": "bing",
+    "text": "Bing",
+    "baseString": "https://www.bing.com/search?q=",
+    "logoImage": "/bing_logo.png",
+    "intro": "A web search engine owned and operated by Microsoft."
+  },
+  {
+    "value": "ecosia",
+    "text": "Ecosia",
+    "baseString": "https://www.ecosia.org/search?q=",
+    "logoImage": "/ecosia_logo.png",
+    "intro": "A search engine based in Berlin, Germany, that donates 80% of its profits to nonprofit organizations that focus on reforestation and planting trees where they are needed most."
+  },
+  {
+    "value": "duckduckgo",
+    "text": "DuckDuckGo",
+    "baseString": "https://duckduckgo.com/?q=",
+    "logoImage": "/ddg_logo.png",
+    "intro": "An internet search engine that emphasizes protecting searchers' privacy."
+  },
+  {
+    "value": "baidu",
+    "text": "Baidu",
+    "baseString": "https://www.baidu.com/s?wd=",
+    "logoImage": "/baidu_logo.png",
+    "intro": "The most popular Chinese search engine."
+  }
+]

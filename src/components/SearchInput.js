@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import { Form, Segment, Image, Container, Popup, Menu, Transition, Grid, Button, Header } from 'semantic-ui-react';
-import fetchData from '../utils/fetchData'
-import setAndGet from '../utils/lsSetAndGet'
+import {
+  Form,
+  Segment,
+  Image,
+  Container,
+  Popup,
+  Menu,
+  Transition,
+  Grid,
+  Button,
+  Header,
+} from 'semantic-ui-react';
+import fetchData from '../utils/fetchData';
+import setAndGet from '../utils/lsSetAndGet';
 
 export default class SearchInput extends Component {
   constructor() {
@@ -12,7 +23,7 @@ export default class SearchInput extends Component {
       query: '',
       isEngineLogoVisible: true,
       inNewWindow: false,
-    }
+    };
   }
   async componentDidMount() {
     const engines = await fetchData('/engineCollection.json');
@@ -23,31 +34,33 @@ export default class SearchInput extends Component {
       engines: engines,
       query: oldQuery,
       engineIndex: oldEngineIndex,
-      inNewWindow: oldNewWindow
+      inNewWindow: oldNewWindow,
     });
   }
-  onQueryChange = (event) => {
-    console.log(event.target)
-    this.setState({ query: event.target.value })
-  }
+  onQueryChange = event => {
+    console.log(event.target);
+    this.setState({ query: event.target.value });
+  };
   onEngineChange = (event, data) => {
     this.setState({ isEngineLogoVisible: false });
-    console.log(data.value)
-    const currentIndex = this.state.engines.findIndex((obj) => obj.value === data.value);
-    this.setState({ engineIndex: currentIndex })
+    console.log(data.value);
+    const currentIndex = this.state.engines.findIndex(
+      obj => obj.value === data.value,
+    );
+    this.setState({ engineIndex: currentIndex });
     setTimeout(() => {
       this.setState({
         isEngineLogoVisible: true,
       });
     }, 300);
-  }
-  handleFormSubmit = (event) => {
+  };
+  handleFormSubmit = event => {
     const s = this.state;
     if (!s.query) {
       alert('Please fill in the search box.');
       return 0;
     }
-    console.log(s.engineIndex)
+    console.log(s.engineIndex);
     const address = s.engines[s.engineIndex].baseString + s.query;
     localStorage.setItem('searchQuery', s.query);
     localStorage.setItem('searchEngineIndex', s.engineIndex);
@@ -58,10 +71,10 @@ export default class SearchInput extends Component {
       event.currentTarget.reset();
       open(address, '_self');
     }
-  }
+  };
   onRadioToggle = () => {
-    this.setState((prevState) => ({ inNewWindow: !prevState.inNewWindow }))
-  }
+    this.setState(prevState => ({ inNewWindow: !prevState.inNewWindow }));
+  };
   render() {
     const s = this.state;
     const engineObject = s.engines[s.engineIndex];
@@ -76,7 +89,7 @@ export default class SearchInput extends Component {
                   <Menu vertical style={{ width: '20rem' }}>
                     <Menu.Item>
                       <Form.Select
-                        label='Search Engine'
+                        label="Search Engine"
                         options={s?.engines}
                         defaultValue={s.engines?.[0]}
                         onChange={this.onEngineChange}
@@ -85,7 +98,7 @@ export default class SearchInput extends Component {
                     <Menu.Item>
                       <Form.Radio
                         toggle
-                        label='Search in New Window'
+                        label="Search in New Window"
                         value={false}
                         checked={s.inNewWindow}
                         onChange={this.onRadioToggle}
@@ -102,18 +115,26 @@ export default class SearchInput extends Component {
           <Grid.Column width={10}>
             <Segment style={{ padding: '2rem' }}>
               <Popup
-                position='top center'
-                trigger={<Container style={{ textAlign: 'center', paddingBottom: '2rem' }}>
-                  <Transition
-                    visible={s.isEngineLogoVisible}
-                    duration={300}
-                    animation="pulse"
+                position="top center"
+                trigger={
+                  <Container
+                    style={{ textAlign: 'center', paddingBottom: '2rem' }}
                   >
-                    <Image src={engineObject?.logoImage}
-                      style={{ height: '15vh', width: 'auto', display: 'inline-block', }}
-                    />
-                  </Transition>
-                </Container>
+                    <Transition
+                      visible={s.isEngineLogoVisible}
+                      duration={300}
+                      animation="pulse"
+                    >
+                      <Image
+                        src={engineObject?.logoImage}
+                        style={{
+                          height: '15vh',
+                          width: 'auto',
+                          display: 'inline-block',
+                        }}
+                      />
+                    </Transition>
+                  </Container>
                 }
               >
                 {engineObject?.intro}
@@ -133,26 +154,35 @@ export default class SearchInput extends Component {
           <Grid.Column width={1} />
         </Grid>
       </Form>
-    )
+    );
   }
 }
 
 function SocialIcons() {
   return (
-    <Segment style={{
-      width: '20rem',
-      bottom: 0
-    }}>
-      <Grid columns={3} verticalAlign='center'>
-        <Grid.Column width={10} style={{ display: 'table-cell', verticalAlign: 'center' }}>
-          <Header as='h3'>Stay connected!</Header>
+    <Segment
+      style={{
+        width: '20rem',
+        bottom: 0,
+      }}
+    >
+      <Grid columns={3} verticalAlign="center">
+        <Grid.Column
+          width={10}
+          style={{ display: 'table-cell', verticalAlign: 'center' }}
+        >
+          <Header as="h3">Stay connected!</Header>
         </Grid.Column>
-        <Grid.Column width={3} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid.Column
+          width={3}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <Popup
-            position='bottom center'
-            trigger={<Button circular color="twitter" icon="twitter" />}
+            position="bottom center"
+            trigger={<Button circular color="twitter" icon="twitter" onClick={null}/>}
             hoverable
             flowing
+            onClick={null}
           >
             <Header
               as="a"
@@ -161,19 +191,23 @@ function SocialIcons() {
               target="_blank _noreferrer"
             >
               @PanoOfficial1
-          </Header>
+            </Header>
           </Popup>
         </Grid.Column>
-        <Grid.Column width={3} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid.Column
+          width={3}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <Popup
-            position='bottom center'
+            position="bottom center"
             trigger={<Button circular color="green" icon="wechat" />}
             hoverable
+            onClick={null}
           >
             <Image src="/wechat.png" />
           </Popup>
         </Grid.Column>
       </Grid>
     </Segment>
-  )
+  );
 }

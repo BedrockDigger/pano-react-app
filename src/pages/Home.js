@@ -1,5 +1,16 @@
 import React, { Component, PureComponent } from 'react';
-import { Grid, Segment, Container, Header, Icon, Button, Menu, Label, Popup, Image } from 'semantic-ui-react';
+import {
+  Grid,
+  Segment,
+  Container,
+  Header,
+  Icon,
+  Button,
+  Menu,
+  Label,
+  Popup,
+  Image,
+} from 'semantic-ui-react';
 import ReactWordcloud from 'react-wordcloud';
 import IntroPortal from '../components/IntroPortal';
 import HistoryPortal from '../components/HistoryPortal';
@@ -7,18 +18,16 @@ import SearchInput from '../components/SearchInput';
 import './Home.css';
 
 export default class Home extends Component {
-
   constructor() {
     super();
-    this.state = {
-    }
+    this.state = {};
   }
 
   render() {
     return (
-      <div className='section'>
+      <div className="section">
         <Grid style={{ width: '100%', height: '100%' }}>
-          <Grid.Row >
+          <Grid.Row>
             <Container>
               <Topbar todayInHistoryObject={this.props.todayInHistoryObject} />
             </Container>
@@ -31,7 +40,7 @@ export default class Home extends Component {
         </Grid>
         <Wordcloud wordCloudObject={this.props.wordCloudObject} />
       </div>
-    )
+    );
   }
 }
 function Topbar(props) {
@@ -40,24 +49,29 @@ function Topbar(props) {
       <Menu.Item style={{ width: '10.25rem' }}>
         <IntroPortal />
       </Menu.Item>
-      <Menu.Item >
+      <Menu.Item>
         <HistoryPortal todayInHistoryObject={props.todayInHistoryObject} />
       </Menu.Item>
-      <Menu.Item position='right'>
+      <Menu.Item position="right">
         {/* TODO update href */}
-        <Label as='a' href='https://github.com/BedrockDigger/pano-react-app/commit/d16a7b43fb274edf2fa2dd45ed372ad0d79eff3b'
-          target='_blank _noreferrer' size='big' style={{ margin: 'auto auto' }} color={this.props.color}
+        <Label
+          as="a"
+          href="https://github.com/BedrockDigger/pano-react-app/commit/d16a7b43fb274edf2fa2dd45ed372ad0d79eff3b"
+          target="_blank _noreferrer"
+          size="big"
+          style={{ margin: 'auto auto' }}
+          color={props.color}
         >
-          <Icon name='code branch' /> v 1.2.0
+          <Icon name="code branch" /> v 1.2.0
         </Label>
       </Menu.Item>
     </Menu>
-  )
+  );
 }
 
 class Wordcloud extends PureComponent {
   render() {
-    console.log(this.props)
+    console.log(this.props);
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
     return (
@@ -77,7 +91,7 @@ class Wordcloud extends PureComponent {
         style={{
           position: 'absolute',
           bottom: 0,
-          zIndex: '-1'
+          zIndex: '-1',
         }}
       />
     );

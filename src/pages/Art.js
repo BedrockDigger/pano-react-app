@@ -8,11 +8,10 @@ import {
   Header,
   Icon,
   Image,
-  Segment,
+  Placeholder
 } from 'semantic-ui-react';
 
 export default class Art extends Component {
-
   constructor() {
     super();
     this.state = { lightboxIsOpen: false };
@@ -20,13 +19,34 @@ export default class Art extends Component {
 
   render() {
     if (!this.props.artworkObject) {
-      return null;
+      return (
+        <div className="section">
+          <Placeholder>
+            <Placeholder.Header image>
+              <Placeholder.Line />
+              <Placeholder.Line />
+            </Placeholder.Header>
+            <Placeholder.Paragraph>
+              <Placeholder.Line />
+              <Placeholder.Line />
+              <Placeholder.Line />
+              <Placeholder.Line />
+            </Placeholder.Paragraph>
+          </Placeholder>
+        </div>
+      )
     }
     const { lightboxIsOpen } = this.state;
     return (
-      <div className='section'>
+      <div className="section">
         <Container textAlign="center" vertical fluid>
-          <Grid columns={2} centered verticalAlign="middle" divided  style={{ width: '100%' }}>
+          <Grid
+            columns={2}
+            centered
+            verticalAlign="middle"
+            divided
+            style={{ width: '100%' }}
+          >
             <Grid.Column width={8}>
               {lightboxIsOpen && (
                 <Lightbox
@@ -43,14 +63,17 @@ export default class Art extends Component {
                 onClick={() => this.setState({ lightboxIsOpen: true })}
                 centered
               />
-              <Grid.Column verticalAlign="middle" style={{paddingTop: '10px'}}>
+              <Grid.Column
+                verticalAlign="middle"
+                style={{ paddingTop: '10px' }}
+              >
                 <Header size="tiny" color={this.props.color} textAlign="center">
                   click to enlarge
                 </Header>
               </Grid.Column>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Grid columns={2} >
+              <Grid columns={2}>
                 <Grid.Column width={1} />
                 <Grid.Column width={15}>
                   <Grid.Row>
@@ -103,6 +126,6 @@ export default class Art extends Component {
           </Grid>
         </Container>
       </div>
-    )
+    );
   }
 }

@@ -4,12 +4,11 @@
     "start": "umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
-    "prettier": "prettier --write '//src//**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
     "push": "npm run build && scp -rp ./dist/* ubuntu@de.pano.today:~/pano/react",
     "lint": "eslint --ext .js --ext .jsx src",
-    "format": "prettier-eslint --write %INIT_CWD%/src/**/*.{js,jsx}"
+    "format": "prettier-eslint --write %INIT_CWD%/src/**/*.{js,jsx,css}"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

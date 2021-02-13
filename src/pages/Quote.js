@@ -1,56 +1,89 @@
 import React, { Component } from 'react';
-import { Grid, Header, Icon, Button } from 'semantic-ui-react';
+import { Grid, Header, Icon, Button, Placeholder, Container } from 'semantic-ui-react';
+import _ from 'lodash'
 
 export default class Quote extends Component {
-
   constructor() {
     super();
   }
 
   render() {
-    if (!this.props.quoteObject) {
-      return null;
-    }
+    const ready = !_.isEmpty(this.props.quoteObject);
     return (
-      <div className='section'>
+      <div className="section">
         <Grid container textAlign="justified" columns={2}>
           <Grid.Row textAlign="center">
-            <Grid.Column width={2} textAlign="right">
+            <Grid.Row>
+<Grid.Column width={2} textAlign="right">
               <Icon name="quote left" size="massive" />
             </Grid.Column>
             <Grid.Column width={14} textAlign="left">
               <Header size="huge" textAlign="justified">
                 <Header.Content>
-                  <p className="quote-content">
-                    {this.props.quoteObject ? this.props.quoteObject.content : ''}
-                    <Icon
-                      className="back-quotation-mark-fix"
-                      name="quote right"
-                      size="tiny"
-                    />
-                  </p>
-                  <Header size="small" textAlign="right" color={this.props.color}>
+                  <Container>
+                    {ready
+                      ?
+                      <>
+                        {this.props.quoteObject.content}
+                        <Icon
+                          style={{ verticalAlign: 'super !important' }}
+                          name="quote right"
+                          size="tiny"
+                        />
+                      </>
+                      : <Placeholder>
+                        <Placeholder.Paragraph>
+                          <Placeholder.Line length='very long' />
+                          <Placeholder.Line />
+                          <Placeholder.Line />
+                          <Placeholder.Line />
+                        </Placeholder.Paragraph>
+                      </Placeholder>
+                    }
+
+                  </Container>
+                  <Header
+                    size="small"
+                    textAlign="right"
+                    color={this.props.color}
+                  >
                     -&nbsp;
-                  {this.props.quoteObject ? this.props.quoteObject.speaker : ''}
+                    {ready
+                      ? this.props.quoteObject.speaker
+                      :
+                      <Placeholder.Line width='long' />
+                    }
                   </Header>
                 </Header.Content>
               </Header>
             </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              
+            </Grid.Row>
+            
           </Grid.Row>
         </Grid>
         <Footer />
       </div>
-    )
+    );
   }
 }
 
 function Footer() {
   return (
-    <div style={{ textAlign: 'center', position: 'absolute', bottom: '1rem', width: '100%' }}>
+    <div
+      style={{
+        textAlign: 'center',
+        position: 'absolute',
+        bottom: '1rem',
+        width: '100%',
+      }}
+    >
       <Header
         as="span"
         size="tiny"
-        color='grey'
+        color="grey"
         style={{ verticalAlign: 'middle', marginRight: 10 }}
       >
         Pano is an open-source search engine with daily inspiration by Zhang

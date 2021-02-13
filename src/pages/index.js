@@ -4,8 +4,8 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import Home from './Home';
 import Art from './Art';
 import Quote from './Quote';
-import fetchData from '../utils/fetchData'
-import calcColor from '../utils/calcColor'
+import fetchData from '../utils/fetchData';
+import calcColor from '../utils/calcColor';
 import 'semantic-ui-css/semantic.min.css';
 
 //TODO set standards for:
@@ -19,21 +19,21 @@ export default class App extends Component {
       quote: {},
       todayInHistory: {},
       wordCloud: {},
-      color: 'grey'
-    }
+      color: 'grey',
+    };
   }
 
   async componentDidMount() {
-    const data = await fetchData('receptionist')
+    const data = await fetchData('receptionist');
     const imageUrl = data.artwork.data.imageSrc;
     const accentColor = calcColor(imageUrl);
-    this.setState((prevState) => ({ ...prevState, ...data }));
+    this.setState(prevState => ({ ...prevState, ...data }));
     this.setState({ color: accentColor });
   }
 
   render() {
     const s = this.state;
-    console.log(this.state)
+    console.log(this.state);
     return (
       <ReactFullpage
         easing="easeOutExpo"
@@ -47,14 +47,8 @@ export default class App extends Component {
                 wordCloudObject={s.wordCloud.data}
                 color={s.color}
               />
-              <Art
-                artworkObject={s.artwork.data}
-                color={s.color}
-              />
-              <Quote
-                quoteObject={s.quote}
-                color={s.color}
-              />
+              <Art artworkObject={s.artwork.data} color={s.color} />
+              <Quote quoteObject={s.quote} color={s.color} />
             </ReactFullpage.Wrapper>
           );
         }}

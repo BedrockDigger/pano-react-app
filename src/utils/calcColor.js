@@ -1,7 +1,8 @@
-import usePalette from 'react-palette';
+import axios from 'axios'
+import ColorThief from 'colorthief';
 import nearestColor from 'nearest-color';
 
-export default function calcColor(url) {
+export default async function calcColor(url) {
   const suiStandardColors = {
     red: '#B03060',
     orange: '#FE9A76',
@@ -16,9 +17,10 @@ export default function calcColor(url) {
     brown: '#A52A2A',
     grey: '#A0A0A0',
     black: '#000000',
-  }
-  const { data } = usePalette(url);
+  };
+  const image = (await axios.get(url)).data;
+  
   const target = data.vibrant;
-  const result = nearestColor(target).from(suiStandardColors)
+  const result = nearestColor(target).from(suiStandardColors);
   return result;
 }

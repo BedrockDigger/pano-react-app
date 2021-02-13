@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
-import { TransitionablePortal, Button, Segment, Header, Feed, Placeholder, Icon } from 'semantic-ui-react';
+import {
+  TransitionablePortal,
+  Button,
+  Segment,
+  Header,
+  Feed,
+  Placeholder,
+  Icon,
+} from 'semantic-ui-react';
 import dayjs from 'dayjs';
 
 export default class HistoryPortal extends Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      open: false,
     };
   }
   onButtonClick = () => {
-    this.setState((prevState) => ({ open: !prevState.open }))
-  }
+    this.setState(prevState => ({ open: !prevState.open }));
+  };
   onPortalClose = () => {
-    this.setState({ open: false })
-  }
+    this.setState({ open: false });
+  };
   render() {
     const date = dayjs().format('MMMM D');
     return (
       <div>
         <Button
-          color='grey'
+          color="grey"
           basic={this.state.open ? true : false}
           icon={this.state.open ? 'close' : 'history'}
           label={{ basic: false, content: date, pointing: false }}
           content={this.state.open ? 'Close' : ' in History'}
-          labelPosition='left'
+          labelPosition="left"
           onClick={this.onButtonClick}
         />
-        <TransitionablePortal onClose={this.onPortalClose} open={this.state.open}>
-          <Segment color='grey' style={{ position: 'fixed', right: '2rem', bottom: '2rem', width: '25vw', zIndex: 1000 }}>
+        <TransitionablePortal
+          onClose={this.onPortalClose}
+          open={this.state.open}
+        >
+          <Segment
+            color="grey"
+            style={{
+              position: 'fixed',
+              right: '2rem',
+              bottom: '2rem',
+              width: '25vw',
+              zIndex: 1000,
+            }}
+          >
             <Header>Today in history</Header>
-            {this.props.todayInHistoryObject ?
+            {this.props.todayInHistoryObject ? (
               <Feed>
                 {this.props.todayInHistoryObject.data.Events?.map(it => (
                   <Feed.Event>
@@ -67,7 +87,7 @@ export default class HistoryPortal extends Component {
                   </Feed.Event>
                 ))}
               </Feed>
-              :
+            ) : (
               <Placeholder>
                 <Placeholder.Header image>
                   <Placeholder.Line />
@@ -82,7 +102,7 @@ export default class HistoryPortal extends Component {
                   <Placeholder.Line />
                 </Placeholder.Header>
               </Placeholder>
-            }
+            )}
             <p>
               Learn more on{' '}
               <a
@@ -90,11 +110,11 @@ export default class HistoryPortal extends Component {
                 target="_blank _noreferrer"
               >
                 Wikipedia.
-            </a>
+              </a>
             </p>
           </Segment>
         </TransitionablePortal>
       </div>
-    )
+    );
   }
 }

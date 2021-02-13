@@ -7,9 +7,6 @@ import Quote from './Quote';
 import fetchData from '../utils/fetchData';
 import 'semantic-ui-css/semantic.min.css';
 
-//TODO set standards for:
-//1.states
-//2.localStorage
 export default class App extends Component {
   constructor() {
     super();
@@ -40,6 +37,7 @@ export default class App extends Component {
               <Home
                 todayInHistoryObject={s.todayInHistory.data}
                 wordCloudObject={s.wordCloud.data}
+                fpMoveTo={n => fpSettings.fullpageApi.moveTo(n)}
               />
               <Art artworkObject={s.artwork.data} />
               <Quote quoteObject={s.quote} />

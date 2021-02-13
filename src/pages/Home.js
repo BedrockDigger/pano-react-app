@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Grid,
   Segment,
@@ -8,7 +8,7 @@ import {
   Button,
   Menu,
   Label,
-  Popup,
+  Transition,
   Image,
 } from 'semantic-ui-react';
 import ReactWordcloud from 'react-wordcloud';
@@ -18,15 +18,32 @@ import SearchInput from '../components/SearchInput';
 import genColor from '../utils/genColor';
 import './Home.css';
 
-export default class Home extends Component {
-  constructor() {
+export default class Home extends PureComponent {
+  constructor(props) {
     super();
-    this.state = {};
+    this.fpMoveTo = props.fpMoveTo;
+    this.domRef = React.createRef();
+    this.state = { isArrowVisible: false };
   }
-
+  move = () => {
+    if (!this.state.isArrowVisible) {
+      this.setState({ isArrowVisible: true }, this.arrowDisappear);
+    }
+  };
+  timer;
+  arrowDisappear = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      this.setState({ isArrowVisible: false });
+      this.timer = null;
+    }, 2000);
+  };
   render() {
+    const s = this.state;
     return (
-      <div className="section">
+      <div className="section" onMouseMove={this.move}>
         <Grid style={{ width: '100%', height: '100%' }}>
           <Grid.Row>
             <Container>
@@ -40,6 +57,27 @@ export default class Home extends Component {
           </Grid.Row>
         </Grid>
         <Wordcloud wordCloudObject={this.props.wordCloudObject} />
+        <Transition visible={s.isArrowVisible} duration={100}>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: 25,
+              width: '50%',
+              left: '25%',
+              textAlign: 'center',
+            }}
+          >
+            <Button
+              circular
+              icon="angle double down"
+              onClick={() => {
+                this.setState({ isArrowVisible: false }, () =>
+                  this.fpMoveTo(2),
+                );
+              }}
+            />
+          </div>
+        </Transition>
       </div>
     );
   }
@@ -55,10 +93,9 @@ function Topbar(props) {
         <HistoryPortal todayInHistoryObject={props.todayInHistoryObject} />
       </Menu.Item>
       <Menu.Item position="right">
-        {/* TODO update href */}
         <Label
           as="a"
-          href="https://github.com/BedrockDigger/pano-react-app/commit/d16a7b43fb274edf2fa2dd45ed372ad0d79eff3b"
+          href="https://github.com/BedrockDigger/pano-react-app/commit/c12e16183693ffd3f81e72c1af1fe777f82c02b4"
           target="_blank _noreferrer"
           size="big"
           style={{ margin: 'auto auto' }}

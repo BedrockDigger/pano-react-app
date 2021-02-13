@@ -99,9 +99,9 @@ export default class SearchInput extends Component {
                       <Form.Radio
                         toggle
                         label="Search in New Window"
-                        value={false}
+                        value={'233'}
                         checked={s.inNewWindow}
-                        onChange={this.onRadioToggle}
+                        onClick={this.onRadioToggle}
                       />
                     </Menu.Item>
                   </Menu>
@@ -166,7 +166,7 @@ function SocialIcons() {
         bottom: 0,
       }}
     >
-      <Grid columns={3} verticalAlign="center">
+      <Grid columns={3}>
         <Grid.Column
           width={10}
           style={{ display: 'table-cell', verticalAlign: 'center' }}
@@ -179,7 +179,9 @@ function SocialIcons() {
         >
           <Popup
             position="bottom center"
-            trigger={<Button circular color="twitter" icon="twitter" onClick={null}/>}
+            trigger={
+              <Button circular color="twitter" icon="twitter" onClick={null} />
+            }
             hoverable
             flowing
             onClick={null}

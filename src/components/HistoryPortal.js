@@ -8,6 +8,7 @@ import {
   Placeholder,
   Icon,
 } from 'semantic-ui-react';
+import genColor from '../utils/genColor';
 import dayjs from 'dayjs';
 
 export default class HistoryPortal extends Component {
@@ -25,10 +26,11 @@ export default class HistoryPortal extends Component {
   };
   render() {
     const date = dayjs().format('MMMM D');
+    const c = genColor();
     return (
       <div>
         <Button
-          color="grey"
+          color={c}
           basic={this.state.open ? true : false}
           icon={this.state.open ? 'close' : 'history'}
           label={{ basic: false, content: date, pointing: false }}
@@ -41,7 +43,7 @@ export default class HistoryPortal extends Component {
           open={this.state.open}
         >
           <Segment
-            color="grey"
+            color={c}
             style={{
               position: 'fixed',
               right: '2rem',

@@ -8,8 +8,10 @@ import {
   Header,
   Icon,
   Image,
-  Placeholder
+  Placeholder,
+  Segment,
 } from 'semantic-ui-react';
+import genColor from '../utils/genColor';
 
 export default class Art extends Component {
   constructor() {
@@ -19,23 +21,9 @@ export default class Art extends Component {
 
   render() {
     if (!this.props.artworkObject) {
-      return (
-        <div className="section">
-          <Placeholder>
-            <Placeholder.Header image>
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Header>
-            <Placeholder.Paragraph>
-              <Placeholder.Line />
-              <Placeholder.Line />
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Paragraph>
-          </Placeholder>
-        </div>
-      )
+      return null;
     }
+    const c = genColor();
     const { lightboxIsOpen } = this.state;
     return (
       <div className="section">
@@ -57,17 +45,19 @@ export default class Art extends Component {
                   enableZoom={false}
                 />
               )}
-              <Image
-                src={this.props.artworkObject.imageSrc}
-                size="medium"
-                onClick={() => this.setState({ lightboxIsOpen: true })}
-                centered
-              />
+              <Segment style={{ width: '50%', margin: 'auto auto' }}>
+                <Image
+                  src={this.props.artworkObject.imageSrc}
+                  size="medium"
+                  onClick={() => this.setState({ lightboxIsOpen: true })}
+                  centered
+                />
+              </Segment>
               <Grid.Column
                 verticalAlign="middle"
                 style={{ paddingTop: '10px' }}
               >
-                <Header size="tiny" color={this.props.color} textAlign="center">
+                <Header size="tiny" color="grey" textAlign="center">
                   click to enlarge
                 </Header>
               </Grid.Column>
@@ -81,11 +71,7 @@ export default class Art extends Component {
                       <Header as="h1">{this.props.artworkObject.artist}</Header>
                     </Grid.Row>
                     <Grid.Row style={{ marginTop: 20, marginBottom: 20 }}>
-                      <Header
-                        as="h1"
-                        color={this.props.color}
-                        style={{ fontStyle: 'italic' }}
-                      >
+                      <Header as="h1" color={c} style={{ fontStyle: 'italic' }}>
                         {this.props.artworkObject.title}
                       </Header>
                     </Grid.Row>
@@ -109,7 +95,7 @@ export default class Art extends Component {
                         icon
                         labelPosition="left"
                         as="a"
-                        color={this.props.color}
+                        color={c}
                         href={this.props.artworkObject.href}
                         floated="left"
                         target="_blank"

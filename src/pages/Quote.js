@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { Grid, Header, Icon, Button, Placeholder, Container } from 'semantic-ui-react';
-import _ from 'lodash'
+import {
+  Grid,
+  Header,
+  Icon,
+  Button,
+  Placeholder,
+  Container,
+} from 'semantic-ui-react';
+import genColor from '../utils/genColor';
 
 export default class Quote extends Component {
   constructor() {
@@ -8,60 +15,39 @@ export default class Quote extends Component {
   }
 
   render() {
-    const ready = !_.isEmpty(this.props.quoteObject);
+    if (!this.props.quoteObject) {
+      return null;
+    }
+    const { speaker, content } = this.props.quoteObject;
     return (
       <div className="section">
         <Grid container textAlign="justified" columns={2}>
-          <Grid.Row textAlign="center">
-            <Grid.Row>
-<Grid.Column width={2} textAlign="right">
-              <Icon name="quote left" size="massive" />
+          <Grid.Row textAlign="center" columns={2}>
+            <Grid.Column width={2} textAlign="right">
+              <Icon name="quote left" size="massive" color={genColor()} />
             </Grid.Column>
+            <Grid.Column width={14} />
+          </Grid.Row>
+          <Grid.Row columns={2}>
+            <Grid.Column width={2} />
             <Grid.Column width={14} textAlign="left">
               <Header size="huge" textAlign="justified">
                 <Header.Content>
-                  <Container>
-                    {ready
-                      ?
-                      <>
-                        {this.props.quoteObject.content}
-                        <Icon
-                          style={{ verticalAlign: 'super !important' }}
-                          name="quote right"
-                          size="tiny"
-                        />
-                      </>
-                      : <Placeholder>
-                        <Placeholder.Paragraph>
-                          <Placeholder.Line length='very long' />
-                          <Placeholder.Line />
-                          <Placeholder.Line />
-                          <Placeholder.Line />
-                        </Placeholder.Paragraph>
-                      </Placeholder>
-                    }
-
-                  </Container>
-                  <Header
-                    size="small"
-                    textAlign="right"
-                    color={this.props.color}
-                  >
+                  <p className="quote-content">
+                    {content}
+                    <Icon
+                      style={{ verticalAlign: 'super' }}
+                      name="quote right"
+                      size="tiny"
+                    />
+                  </p>
+                  <Header size="small" textAlign="right" color={genColor()}>
                     -&nbsp;
-                    {ready
-                      ? this.props.quoteObject.speaker
-                      :
-                      <Placeholder.Line width='long' />
-                    }
+                    {speaker}
                   </Header>
                 </Header.Content>
               </Header>
             </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              
-            </Grid.Row>
-            
           </Grid.Row>
         </Grid>
         <Footer />

@@ -15,6 +15,7 @@ import ReactWordcloud from 'react-wordcloud';
 import IntroPortal from '../components/IntroPortal';
 import HistoryPortal from '../components/HistoryPortal';
 import SearchInput from '../components/SearchInput';
+import genColor from '../utils/genColor';
 import './Home.css';
 
 export default class Home extends Component {
@@ -44,6 +45,7 @@ export default class Home extends Component {
   }
 }
 function Topbar(props) {
+  const c = genColor();
   return (
     <Menu stackable>
       <Menu.Item style={{ width: '10.25rem' }}>
@@ -60,7 +62,7 @@ function Topbar(props) {
           target="_blank _noreferrer"
           size="big"
           style={{ margin: 'auto auto' }}
-          color={props.color}
+          color={c}
         >
           <Icon name="code branch" /> v 1.2.0
         </Label>
@@ -71,7 +73,6 @@ function Topbar(props) {
 
 class Wordcloud extends PureComponent {
   render() {
-    console.log(this.props);
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
     return (

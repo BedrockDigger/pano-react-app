@@ -6,6 +6,7 @@ import {
   Image,
   Card,
 } from 'semantic-ui-react';
+import genColor from '../utils/genColor';
 
 //IntroPortal includes Intro Button and the Portal
 export default class IntroPortal extends Component {
@@ -32,10 +33,11 @@ export default class IntroPortal extends Component {
   };
 
   render() {
+    const c = genColor();
     return (
       <div>
         <Button
-          color="grey"
+          color={c}
           basic={this.state.open ? true : false}
           icon={this.state.open ? 'close' : 'info'}
           content={this.state.open ? 'Close' : 'Pano'}
@@ -54,7 +56,7 @@ export default class IntroPortal extends Component {
               width: '25vw',
               zIndex: 1000,
             }}
-            color="grey"
+            color={c}
           >
             <Image src="/logo.png" wrapped ui={false} />
             <Card.Content>

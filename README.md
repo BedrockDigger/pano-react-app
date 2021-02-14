@@ -5,7 +5,7 @@
 [de.pano.today](http://de.pano.today) (hosted on AWS Frankfurt, Germany)
 
 ## Introduction
-**This project is still in alpha stage development.**
+**~~This project is still in alpha stage development.~~Version 1.2.0 stable has released!**
 **Currently designed for desktop screens only. Use latest Chrome/Edge/Firefox to get the best experience.**
 This is a personal project of a nice & yet clean and elegant start page.
 Simplicity is kept in mind by design to provide inspirations before your dive into the Internet.

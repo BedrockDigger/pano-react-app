@@ -8,7 +8,7 @@ export default defineConfig({
   routes: [{ path: '/', component: '@/pages/index' }],
   proxy: {
     '/receptionist': {
-      target: 'http://localhost:3030/',
+      target: 'http://de.pano.today/',
       changeOrigin: true,
     },
   },

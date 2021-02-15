@@ -5,7 +5,7 @@
 [de.pano.today](http://de.pano.today) (hosted on AWS Frankfurt, Germany)
 
 ## Introduction
-**This project is still in alpha stage development.**
+**~~This project is still in alpha stage development.~~Version 1.2.0 stable has released!**
 **Currently designed for desktop screens only. Use latest Chrome/Edge/Firefox to get the best experience.**
 This is a personal project of a nice & yet clean and elegant start page.
 Simplicity is kept in mind by design to provide inspirations before your dive into the Internet.
@@ -17,7 +17,7 @@ This repo contains the React web app. The accompanying nodejs server is in [anot
 - daily artwork
 - Lightbox for zooming the artwork
 - daily quote
-- customizable daily accent colors
+- daily accent colors
 
 ## Installation
 1. Start up the backend Feathers App first.
@@ -31,10 +31,6 @@ $ npm start
 
 ## Dependencies
 Pano frontend won't be possible without the following:
-- React
-- Semantic UI
-- Umi.js
-- and more:
 ``` json
 "dependencies": {
     "@ant-design/pro-layout": "^5.0.12",

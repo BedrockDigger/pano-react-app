@@ -19,7 +19,7 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    const data = await fetchData('receptionist');
+    const data = await fetchData('receptionist', true);
     this.setState(prevState => ({ ...prevState, ...data }));
   }
 

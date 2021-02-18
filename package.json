@@ -6,7 +6,8 @@
     "postinstall": "umi generate tmp",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "push": "npm run build && scp -rp ./dist/* ubuntu@de.pano.today:~/pano/react",
+    "buildAndPush": "npm run build && scp -rp ./dist/* ubuntu@162.62.63.164:~/pano/react-app",
+    "push": "scp -rp ./dist/* ubuntu@162.62.63.164:~/pano/react-app",
     "lint": "eslint --ext .js --ext .jsx src",
     "format": "prettier-eslint --write %INIT_CWD%/src/**/*.{js,jsx,css}"
   },

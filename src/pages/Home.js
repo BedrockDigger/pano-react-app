@@ -46,12 +46,12 @@ export default class Home extends PureComponent {
       <div className="section" onMouseMove={this.move}>
         <Grid style={{ width: '100%', height: '100%' }}>
           <Grid.Row>
-            <Container>
+            <Container style={{ width: '90%' }}>
               <Topbar todayInHistoryObject={this.props.todayInHistoryObject} />
             </Container>
           </Grid.Row>
           <Grid.Row style={{ height: '62vh' }}>
-            <Container style={{ width: '85%' }}>
+            <Container style={{ width: '80%' }}>
               <SearchInput />
             </Container>
           </Grid.Row>

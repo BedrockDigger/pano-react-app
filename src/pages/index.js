@@ -1,9 +1,11 @@
 /* eslint-disable react/no-deprecated */
 import React, { Component } from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
+import { isMobile } from 'react-device-detect';
 import Home from './Home';
 import Art from './Art';
 import Quote from './Quote';
+import Mobile from './Mobile';
 import fetchData from '../utils/fetchData';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -26,6 +28,9 @@ export default class App extends Component {
   render() {
     const s = this.state;
     console.log(this.state);
+    if (isMobile) {
+      return <Mobile />;
+    }
     return (
       <ReactFullpage
         easing="easeOutExpo"

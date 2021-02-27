@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import {
-  Form,
+  Radio,
   Segment,
   Image,
-  Container,
+  Icon,
   Popup,
   Menu,
   Transition,
   Grid,
   Button,
   Header,
+  Select,
+  Form,
+  Container,
 } from 'semantic-ui-react';
 import fetchData from '../utils/fetchData';
 import setAndGet from '../utils/lsSetAndGet';
@@ -52,7 +55,7 @@ export default class SearchInput extends Component {
       this.setState({
         isEngineLogoVisible: true,
       });
-    }, 300);
+    }, 200);
   };
   handleFormSubmit = event => {
     const s = this.state;
@@ -79,66 +82,74 @@ export default class SearchInput extends Component {
     const s = this.state;
     const engineObject = s.engines[s.engineIndex];
     return (
-      <Form onSubmit={this.handleFormSubmit} style={{ height: '50vh' }}>
-        <Grid columns={3}>
-          <Grid.Column width={1} />
-          <Grid.Column width={4}>
-            <Grid>
-              <Grid.Row>
-                <Form.Field>
-                  <Menu vertical style={{ width: '20rem' }}>
-                    <Menu.Item>
-                      <Form.Select
+      <Grid columns={2}>
+        <Grid.Column width={4} stretched>
+          <Grid>
+            <Grid.Row>
+              <Menu vertical style={{ width: '100%' }}>
+                <Menu.Item>
+                  <Grid centered>
+                    <Grid.Row style={{ paddingBottom: 0 }}>
+                      <Header>Search engine</Header>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Select
                         label="Search Engine"
                         options={s?.engines}
                         defaultValue={s.engines?.[0]}
                         onChange={this.onEngineChange}
                       />
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Form.Radio
-                        toggle
-                        label="Search in New Window"
+                    </Grid.Row>
+                  </Grid>
+                </Menu.Item>
+                <Menu.Item>
+                  <Grid centered>
+                    <Grid.Row>
+                      <Radio
+                        slider
+                        label="Search in new window"
                         value={'233'}
                         checked={s.inNewWindow}
                         onClick={this.onRadioToggle}
                       />
-                    </Menu.Item>
-                  </Menu>
-                </Form.Field>
-              </Grid.Row>
-              <Grid.Row>
-                <SocialIcons />
-              </Grid.Row>
-            </Grid>
-          </Grid.Column>
-          <Grid.Column width={10}>
-            <Segment style={{ padding: '2rem' }}>
-              <Popup
-                position="top center"
-                trigger={
-                  <Container
-                    style={{ textAlign: 'center', paddingBottom: '2rem' }}
+                    </Grid.Row>
+                  </Grid>
+                </Menu.Item>
+              </Menu>
+            </Grid.Row>
+            <Grid.Row style={{ paddingTop: 0 }}>
+              <SocialIcons />
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
+        <Grid.Column width={12} stretched>
+          <Segment style={{ padding: '2rem' }}>
+            <Popup
+              position="top center"
+              trigger={
+                <Container
+                  style={{ textAlign: 'center', paddingBottom: '2rem' }}
+                >
+                  <Transition
+                    visible={s.isEngineLogoVisible}
+                    duration={200}
+                    animation="pulse"
                   >
-                    <Transition
-                      visible={s.isEngineLogoVisible}
-                      duration={300}
-                      animation="pulse"
-                    >
-                      <Image
-                        src={engineObject?.logoImage}
-                        style={{
-                          height: '15vh',
-                          width: 'auto',
-                          display: 'inline-block',
-                        }}
-                      />
-                    </Transition>
-                  </Container>
-                }
-              >
-                {engineObject?.intro}
-              </Popup>
+                    <Image
+                      src={engineObject?.logoImage}
+                      style={{
+                        height: '15vh',
+                        width: 'auto',
+                        display: 'inline-block',
+                      }}
+                    />
+                  </Transition>
+                </Container>
+              }
+            >
+              {engineObject?.intro}
+            </Popup>
+            <Form onSubmit={this.handleFormSubmit}>
               <Form.Field>
                 <Form.Input
                   placeholder="All engines, one Pano."
@@ -149,66 +160,60 @@ export default class SearchInput extends Component {
                   value={s.query}
                 />
               </Form.Field>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column width={1} />
-        </Grid>
-      </Form>
+            </Form>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
 function SocialIcons() {
   return (
-    <Segment
-      style={{
-        width: '20rem',
-        bottom: 0,
-      }}
-    >
-      <Grid columns={3}>
-        <Grid.Column
-          width={10}
-          style={{ display: 'table-cell', verticalAlign: 'center' }}
-        >
+    <Segment>
+      <Grid centered>
+        <Grid.Row style={{ paddingBottom: 0 }}>
           <Header as="h3">Stay connected!</Header>
-        </Grid.Column>
-        <Grid.Column
-          width={3}
-          style={{ display: 'flex', justifyContent: 'center' }}
-        >
-          <Popup
-            position="bottom center"
-            trigger={
-              <Button circular color="twitter" icon="twitter" onClick={null} />
-            }
-            hoverable
-            flowing
-            onClick={null}
-          >
-            <Header
-              as="a"
-              color="blue"
-              href="https://twitter.com/PanoOfficial1"
-              target="_blank _noreferrer"
-            >
-              @PanoOfficial1
-            </Header>
-          </Popup>
-        </Grid.Column>
-        <Grid.Column
-          width={3}
-          style={{ display: 'flex', justifyContent: 'center' }}
-        >
-          <Popup
-            position="bottom center"
-            trigger={<Button circular color="green" icon="wechat" />}
-            hoverable
-            onClick={null}
-          >
-            <Image src="/wechat.png" />
-          </Popup>
-        </Grid.Column>
+        </Grid.Row>
+        <Grid.Row style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <Grid columns={2} textAlign="center" style={{ padding: 0 }}>
+            <Grid.Column style={{ paddingRight: 0 }}>
+              <Popup
+                position="bottom center"
+                trigger={
+                  <Button color="twitter" compact>
+                    <Icon name="twitter" /> Twitter
+                  </Button>
+                }
+                hoverable
+                flowing
+              >
+                <Header
+                  as="a"
+                  color="blue"
+                  href="https://twitter.com/PanoOfficial1"
+                  target="_blank _noreferrer"
+                >
+                  @PanoOfficial1
+                </Header>
+              </Popup>
+            </Grid.Column>
+            <Grid.Column style={{ paddingLeft: 0 }}>
+              <Popup
+                position="bottom center"
+                trigger={
+                  <Button color="green" compact>
+                    <Icon name="wechat" /> WeChat
+                  </Button>
+                }
+                hoverable
+                onClick={null}
+              >
+                <Image src="/wechat.png" />
+              </Popup>
+            </Grid.Column>
+          </Grid>
+        </Grid.Row>
       </Grid>
     </Segment>
   );

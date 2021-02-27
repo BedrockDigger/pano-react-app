@@ -101,7 +101,7 @@ export default class Art extends Component {
                         target="_blank"
                         style={{ marginTop: '1.5rem' }}
                       >
-                        <Icon name="info" />
+                        <Icon name="external square" />
                         Learn more on artsy.net
                       </Button>
                     </Grid.Row>

@@ -2,7 +2,7 @@
 ###### A start panel for web browsing, a panorama of inspiration.
 
 ## Demo
-[de.pano.today](http://de.pano.today) (hosted on AWS Frankfurt, Germany)
+~~[de.pano.today](http://de.pano.today) (hosted on AWS Frankfurt, Germany)~~
 
 ## Introduction
 **~~This project is still in alpha stage development.~~Version 1.2.0 stable has released!**
